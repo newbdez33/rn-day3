@@ -13,6 +13,24 @@ import {
 } from 'react-native';
 
 export default class weatherapp extends Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {tick:0};
+  }
+
+  componentDidMount() {
+      this.inteval = setInterval(this.tick.bind(this), 1000)
+  }
+
+  componentWillUnmount() {
+      clearInterval(this.interval)
+  }
+
+  tick() {
+      this.setState({tick:this.state.tick+1});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -20,11 +38,7 @@ export default class weatherapp extends Component {
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          {this.state.tick}
         </Text>
       </View>
     );
